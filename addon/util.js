@@ -12,6 +12,10 @@ Util.reopenClass({
     return !obj || (obj === "");
   },
 
+  hasValues: function(obj) {
+    return obj;
+  },
+
   keysOtherThan: function(params,excludeKeys) {
     excludeKeys = Ember.A(excludeKeys);
     var res = [];

@@ -5,7 +5,10 @@ import Util from '../util';
 export var QueryParamsForBackend = Ember.Object.extend({
   defaultKeyFor: function(key) {
     if (key === 'perPage') {
-      return 'per_page';
+      return 'page[size]';
+    }
+    if (key === 'page') {
+      return 'page[number]';
     }
     return null;
   },
@@ -108,8 +111,8 @@ export var ChangeMeta = Ember.Object.extend({
   },
 
   validate: function(meta) {
-    if (Util.isBlank(meta.total_pages)) {
-      Validate.internalError("no total_pages in meta response",meta);
+    if (Util.isBlank(meta.total_pages) &&  Util.isBlank(meta["total-pages"])) {
+      Validate.internalError("no total_pages or total-pages in meta response",meta);
     }
   }
 });
